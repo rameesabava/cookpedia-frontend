@@ -1,0 +1,55 @@
+<app-header></app-header>
+<section class="container my-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <h4>Filter</h4>
+            <!-- all -->
+            <button (click)="getAllRecipes()" class="btn mt-5">All</button>
+            <!-- cuisine -->
+            <div>
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Cuisine
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <!-- duplicate cuisine items -->
+                    <button class="btn">cuisine</button>
+                </div>
+            </div>
+            <!-- meal type -->
+             <div>
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                    Meal Type
+                </button>
+                <div class="collapse" id="collapseExample1">
+                    <!-- duplicate meal types -->
+                    <button class="btn">meal</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>All Recipes</h1>
+                <input type="text" placeholder="Search Recipe Here!" class="form-control w-50">
+            </div>
+            <!-- recipes list row -->
+             <div class="row my-3">
+                <!-- duplicate with recipe count -->
+               @for (recipe of allRecipes(); track $index){
+                  <div class="col-lg-4">
+                    <div class="p-3">
+                    <img class="card-img-top img-fluid"
+                        [src]="recipe.image" alt="recipe">
+                    <div class="card-body">
+                        <h5 class="card-title">{{recipe.name}}</h5>
+                        <p>Cuisine: {{recipe.cuisine}}</p>
+                    </div>
+                </div>
+                 </div>
+               }
+             </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
