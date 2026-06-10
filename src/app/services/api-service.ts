@@ -12,4 +12,14 @@ export class ApiService {
   getAllRecipesAPI(){
     return this.http.get<any[]>(`${this.server_url}/recipes`)
   }
+
+  // post req by contact component when send btn clicked
+  addFeedbackAPI(reqBody:any){
+    return this.http.post(`${this.server_url}/feedbacks`,reqBody)
+  }
+
+  // get req by home component when page loads
+  getAllApprovedFeedbacksAPI(){
+    return this.http.get<any[]>(`${this.server_url}/feedbacks/approved`)
+  }
 }
