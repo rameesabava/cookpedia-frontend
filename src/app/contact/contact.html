@@ -57,19 +57,28 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <div class="border shadow rounded p-5">
+      <form #feedbackForm="ngForm" (ngSubmit)="submitFeedbackForm(feedbackForm)" class="border shadow rounded p-5">
         <p class="fw-bold fs-5">Client Testimony</p>
-        <input type="text" class="form-control mb-3" placeholder="Name">
-        <input type="email" class="form-control mb-3" placeholder="E Mail">
-<textarea class="form-control mb-3" placeholder="Message"></textarea>
+        <input #username="ngModel" [(ngModel)]="name" name="name" type="text" class="form-control mb-3" placeholder="Name" required pattern="[a-zA-Z]*">
+        @if(username.invalid && username.touched){
+          <div class="mb-3 text-danger">Invalid Name</div>
+        }
+        <input #usermail="ngModel" [(ngModel)]="email" name="usermail" type="email" class="form-control mb-3" placeholder="E Mail" required email>
+        @if(usermail.invalid && usermail.touched){
+          <div class="mb-3 text-danger">Invalid Email</div>
+        }
+<textarea #usermessage="ngModel" [(ngModel)]="message" name="usermessage"  class="form-control mb-3" placeholder="Message" required></textarea>
+@if(usermessage.invalid && usermessage.touched){
+          <div class="mb-3 text-danger">Invalid Message</div>
+        }
 <p class="text-secondary">By Submitting, you are agreeing the terms and condition of our website. We may use your details in our site</p>
 <div class="text-end">
   <button class="btn btn-success">Submit</button>
   
-</div>      </div>
+</div>      </form>
     </div>
   </div>
 <!-- map -->
 
-<iframe class="w-100 mb-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.9752175650774!2d76.34006767369702!3d10.018903590087458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080ffce877d5ef%3A0x8bef6870ad11b98!2sLuminar%20Technolab%20-%20Python%2C%20Data%20Science%2C%20AI%2C%20ASP.NET%2C%20Flutter%2C%20Software%20Testing%20Training%20Institute%20in%20Kochi!5e0!3m2!1sen!2sin!4v1781085657881!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
+<iframe class="w-100 mb-5" [height]="400" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.9752175650774!2d76.34006767369702!3d10.018903590087458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080ffce877d5ef%3A0x8bef6870ad11b98!2sLuminar%20Technolab%20-%20Python%2C%20Data%20Science%2C%20AI%2C%20ASP.NET%2C%20Flutter%2C%20Software%20Testing%20Training%20Institute%20in%20Kochi!5e0!3m2!1sen!2sin!4v1781085657881!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
 <app-footer></app-footer>

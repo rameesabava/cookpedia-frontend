@@ -2,13 +2,22 @@
             background-position: center;
             background-repeat: no-repeat;">
 
-        <div class="border shadow p-5 rounded d-flex flex-column gap-2 justify-content-center align-items-center me-5">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="border shadow p-5 rounded d-flex flex-column gap-2 justify-content-center align-items-center me-5">
             <div class="fw-bold fs-5"><i class="fa-solid fa-graduation-cap"></i> Cookpedia</div>
-            <input type="text" placeholder="Username" class="form-control">
-            <input type="email" placeholder="E Mail" class="form-control">
-            <input type="password" placeholder="Password" class="form-control">
-            <button class="btn btn-success w-100">Register</button>
-        </div>
+            <input name="Username" formControlName="username" type="text" placeholder="Username" class="form-control">
+            @if (registerForm.get('username')?.errors && registerForm.get('username')?.touched){
+                <div class="mb-3 text-danger fw-bolder">*Invalid Username</div>
+            }
+            <input name="email" formControlName="email" type="email" placeholder="E Mail" class="form-control">
+             @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched){
+                <div class="mb-3 text-danger fw-bolder">*Invalid Email</div>
+            }
+            <input name="password" formControlName="password" type="password" placeholder="Password" class="form-control">
+             @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched){
+                <div class="mb-3 text-danger fw-bolder">*Invalid Password</div>
+            }
+            <button type="submit" class="btn btn-success w-100">Register</button>
+        </form>
         <div class="ms-5">
             <h2>Create New Account</h2>
             <p>What you will get?</p>

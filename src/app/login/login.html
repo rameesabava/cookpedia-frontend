@@ -4,12 +4,18 @@
    <div class="d-flex flex-column">
         <h4>Login</h4>
     <p>More than 100 plus Recipes from around the world</p>
-        <div class="border shadow p-5 rounded d-flex flex-column gap-2 justify-content-center align-items-center me-5">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="border shadow p-5 rounded d-flex flex-column gap-2 justify-content-center align-items-center me-5">
             <div class="fw-bold fs-5"><i class="fa-solid fa-graduation-cap"></i> Cookpedia</div>
-            <input type="email" placeholder="E Mail" class="form-control">
-            <input type="password" placeholder="Password" class="form-control">
-            <button class="btn btn-success w-100">Login</button>
-        </div>
+            <input name="email" formControlName="email" type="email" placeholder="E Mail" class="form-control">
+             @if (loginForm.get('email')?.errors && loginForm.get('email')?.touched){
+                <div class="mb-3 text-danger fw-bolder">*Invalid Email</div>
+            }
+            <input name="password" formControlName="password" type="password" placeholder="Password" class="form-control">
+            @if (loginForm.get('password')?.errors && loginForm.get('password')?.touched){
+                <div class="mb-3 text-danger fw-bolder">*Invalid Password</div>
+            }
+            <button type="submit" class="btn btn-success w-100">Login</button>
+        </form>
        
     
    </div>

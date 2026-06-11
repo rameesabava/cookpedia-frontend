@@ -22,4 +22,14 @@ export class ApiService {
   getAllApprovedFeedbacksAPI(){
     return this.http.get<any[]>(`${this.server_url}/feedbacks/approved`)
   }
+
+  // post req by register component when register btn clicked
+  registerAPI(reqBody:any){
+    return this.http.post(`${this.server_url}/register`,reqBody)
+  }
+
+  // post req by login component when login btn clicked
+  loginAPI(reqBody:any){
+    return this.http.post(`${this.server_url}/login`,reqBody)
+  }
 }
