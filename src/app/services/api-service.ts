@@ -52,4 +52,24 @@ export class ApiService {
   getRelatedRecipesAPI(cuisine:string){
     return this.http.get<any[]>(`${this.server_url}/recipes-related?cuisine=${cuisine}`, this.appendToken())
   }
+
+  // download recipe : req by view component when download btn clicked
+  downloadRecipeAPI(recipeId:string,recipe:any){
+    return this.http.post(`${this.server_url}/recipes/${recipeId}/download`,recipe, this.appendToken())
+  }
+
+  // save recipe : req by view component when save recipe btn clicked
+  saveRecipeAPI(recipeId:string,recipe:any){
+    return this.http.post(`${this.server_url}/recipes/${recipeId}/save`,recipe, this.appendToken())
+  }
+
+  // get all saved recipe : req by save recipe component when page loads
+  getAllSaveRecipeAPI(){
+    return this.http.get<any[]>(`${this.server_url}/recipes-save`, this.appendToken())
+  }
+
+  // remove recipe from save collection : req by save recipe component when delete btn clicked
+  removeRecipeFromSaveRecipesAPI(id:string){
+    return this.http.delete(`${this.server_url}/recipes-save/${id}`, this.appendToken())
+  }
 }

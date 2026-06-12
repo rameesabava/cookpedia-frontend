@@ -5,6 +5,9 @@ import { AdminModuleRoutingModule } from "../admin-module/admin-module-routing-m
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api-service';
 import { AsyncPipe } from '@angular/common';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-view-recipe',
@@ -46,6 +49,46 @@ export class ViewRecipe {
   viewRelatedRecipePage(id:string){
     this.recipe$ = this.api.viewRecipeAPI(id)
     this.router.navigateByUrl(`/recipes/${id}`)
+  }
+
+  downloadRecipe(){
+    this.recipe$.subscribe((res:any)=>{
+      this.addRecipe(res)
+    })
+  }
+
+  addRecipe(recipe:any){
+    this.api.downloadRecipeAPI(recipe._id,recipe).subscribe((res:any)=>{
+      console.log(res);
+      // download pdf
+      this.generatePDF(recipe)
+      
+    })
+  }
+
+  generatePDF(recipe:any){
+    let pdf = new jsPDF()
+    let titleRow = [['Name','Cuisine','Ingredients','Instructions','Calories','Servings']]
+    let contentRow = [[recipe.name, recipe.cuisine,recipe.ingredients,recipe.instructions,recipe.caloriesPerServing, recipe.servings]]
+    autoTable(pdf,{head:titleRow,body:contentRow})
+    pdf.save(`${recipe.name}.pdf`)
+  }
+
+  saveRecipe(){
+    this.recipe$.subscribe((res:any)=>{
+      this.addToSaveRecipe(res)
+    })
+  }
+
+  addToSaveRecipe(recipe:any){
+    this.api.saveRecipeAPI(recipe._id,recipe).subscribe({
+      next:(res:any)=>{
+        alert(`${recipe.name} added to your collection!!!`)
+      },
+      error:(reason:any)=>{
+        alert(reason.error)
+      }
+    })
   }
  
 }
