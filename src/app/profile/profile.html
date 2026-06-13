@@ -1,1 +1,38 @@
-<p>profile works!</p>
+<app-header></app-header>
+<div class="container">
+    <div style="height: 200px;" class="row bg-success">
+    </div>
+    <!-- img -->
+    <div style="height: 220px; width: 220px; border-radius: 50%; margin-top: -100px;" class="p-2 border">
+        <img style="height: 200px; width: 200px; border-radius: 50%;" [src]="imgURL()" alt="user">
+    </div>
+    <!-- upload image icon -->
+    <label for="uploadImg">
+        <input (change)="uploadPicture($event)" type="file" id="uploadImg" hidden>
+        <span style="margin-left: 100px; margin-top: -30px;" class="btn btn-primary"><i
+                class="fa-solid fa-upload"></i></span>
+    </label>
+    <h1>{{username}} <i class="fa-solid fa-check-circle text-primary"></i></h1>
+    <p style="text-align: justify;">🍲 Passionate about discovering simple, delicious recipes and experimenting in the
+        kitchen. I enjoy trying new cuisines, adding my own twists to classic dishes, and sharing my cooking experiences
+        with the Cookpedia community.</p>
+    <p style="text-align: justify;">✨ On Cookpedia, I love exploring quick meals, healthy recipes, and traditional
+        favorites that bring comfort and flavor together.</p>
+    <p>📍 Favorite Cuisines: Indian, Italian, Continental</p>
+    <p>❤️ Cooking Level: Beginner → Intermediate</p>
+    <p>🕓 Cooking Style: Quick & Easy Meals</p>
+    <h3 class="my-5">Recipe Download List</h3>
+    <div class="row">
+       @for (recipe of downloadList$ | async; track $index){
+         <div class="col-lg-2">
+            <div routerLink="/recipes/{{recipe.recipeId}}" class="p-3">
+                <img class="card-img-top img-fluid" [src]="recipe.image" alt="recipe">
+                <div class="card-body">
+                    <h5 class="card-title">{{recipe.name}}</h5>
+                </div>
+            </div>
+        </div>
+       }
+    </div>
+</div>
+<app-footer></app-footer>

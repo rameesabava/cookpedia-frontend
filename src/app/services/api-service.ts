@@ -72,4 +72,14 @@ export class ApiService {
   removeRecipeFromSaveRecipesAPI(id:string){
     return this.http.delete(`${this.server_url}/recipes-save/${id}`, this.appendToken())
   }
+  // get req by profile component when page loads
+getUserDownloadListAPI(){
+    return this.http.get<any[]>(`${this.server_url}/user-downloads`, this.appendToken())
+  }
+
+  // put req by profile component when picture edit
+  updateUserProfileAPI(userId:string,reqBody:any){
+    return this.http.put(`${this.server_url}/users/${userId}`, reqBody,this.appendToken())
+  }
+
 }
