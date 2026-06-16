@@ -82,4 +82,23 @@ getUserDownloadListAPI(){
     return this.http.put(`${this.server_url}/users/${userId}`, reqBody,this.appendToken())
   }
 
+  // get all users : get req by admin users component when page opens
+  getAllUsersListAPI(){
+    return this.http.get<any[]>(`${this.server_url}/users`,this.appendToken())
+  }
+
+  // get all feedbacks : get req by admin feedbacks component when page opens
+  getAllFeedbackListAPI(){
+    return this.http.get<any[]>(`${this.server_url}/feedbacks`,this.appendToken())
+  }
+
+  // get all downloads : get req by admin download component when page opens
+  getAllDownloadListAPI(){
+    return this.http.get<any[]>(`${this.server_url}/downloads`,this.appendToken())
+  }
+
+  // put req by feedback component when approve or reject btn clicked
+  updateFeedbackAPI(id:string, reqBody:any){
+    return this.http.put(`${this.server_url}/feedbacks/${id}`,reqBody,this.appendToken())
+  }
 }

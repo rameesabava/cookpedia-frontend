@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ApiService } from '../../services/api-service';
 
 @Component({
   selector: 'app-users',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
-export class Users {}
+export class Users {
+  api = inject(ApiService)
+  allUsers$ = this.api.getAllUsersListAPI()
+}

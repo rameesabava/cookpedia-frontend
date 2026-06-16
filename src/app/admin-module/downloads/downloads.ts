@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ApiService } from '../../services/api-service';
 
 @Component({
   selector: 'app-downloads',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './downloads.html',
   styleUrl: './downloads.css',
 })
-export class Downloads {}
+export class Downloads {
+  api = inject(ApiService)
+  allDownloadList$ = this.api.getAllDownloadListAPI()
+}
