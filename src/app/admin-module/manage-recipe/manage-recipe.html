@@ -1,1 +1,104 @@
-<p>manage-recipe works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <h1 class="my-5">
+                    @if(recipeId){ Update } @else{ Add } Recipe Details
+                </h1>
+                <!-- {{instructionArray | json}} -->
+                <div style="width: 900px;" class="border p-5 rounded my-5">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().name" placeholder="Recipe Name" type="text" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().cuisine" placeholder="Recipe Cuisine Type" type="text" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().image" placeholder="Recipe Image URL" type="text" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().prepTimeMinutes" placeholder="Recipe Preparation Time in Minutes (ex: 25)" type="text"
+                                    class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex mb-2">
+                                    <textarea #ingredientInput class="form-control" placeholder="Add Ingredients"></textarea>
+                                    <button (click)="addIngredient(ingredientInput)" class="btn fw-bolder fs-1 ms-1">+</button>
+                                </div>
+                                 <!-- display ingredients list -->
+                                @for(item of ingredientArray; track $index){
+                                    <div class="d-flex mb-1">
+                                    <input [value]="item" type="text" placeholder="Ingredient" class="form-control" readonly>
+                                    <button (click)="removeIngredient(item)" class="btn fw-bolder"><i class="fa-solid fa-trash text-danger"></i></button>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().servings" placeholder="Servings (ex: 4)" type="text" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().caloriesPerServing" placeholder="Calorie per Serving (ex: 350)" type="text" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <input [(ngModel)]="recipeDetails().cookTimeMinutes" placeholder="Cook Time in Minutes" type="text" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <select [(ngModel)]="recipeDetails().difficulty" class="form-control">
+                                    <option selected disabled hidden>Choose Mode of Cooking</option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex mb-2">
+                                    <textarea #instructionInput class="form-control" placeholder="Add Instructions"></textarea>
+                                    <button (click)="addInstruction(instructionInput)" class="btn fw-bolder fs-1 ms-1">+</button>
+                                </div>
+                                <!-- display instruction list -->
+                                  @for(item of instructionArray; track $index){
+                                <div class="d-flex mb-1">
+                                    <input [value]="item" type="text" placeholder="Instruction" class="form-control" readonly>
+                                    <button (click)="removeInstruction(item)" class="btn fw-bolder"><i class="fa-solid fa-trash text-danger"></i></button>
+                                </div>
+                            }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-2">
+                        <textarea #mealInput class="form-control"
+                            placeholder="Add Meal Type (ex: Breakfast, Lunch, Dinner etc...)"></textarea>
+                        <button (click)="addMealType(mealInput)" class="btn fw-bolder fs-1 ms-1">+</button>
+
+                    </div>
+                    <!-- display added meal type -->
+                      
+                    <div class="d-flex flex-wrap">
+                        @for(item of MealTypeArray; track $index){
+                        <span class="border rounded ps-2 me-1">{{item}}
+                            <button (click)="removeMealType(item)" class="btn fw-bolder"><i class="fa-solid fa-x"></i></button>
+                        </span>
+                    }
+                    </div>
+                
+                    <div class="text-center mt-3">
+                        @if(recipeId){
+                        <button class="btn btn-warning">Update Recipe</button>
+                        }@else {
+                        <button (click)="addRecipe()" class="btn btn-success">Add Recipe</button>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

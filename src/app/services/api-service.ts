@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { RecipeModel } from '../admin-module/models/recipeModel';
 
 @Injectable({
   providedIn: 'root',
@@ -100,5 +101,10 @@ getUserDownloadListAPI(){
   // put req by feedback component when approve or reject btn clicked
   updateFeedbackAPI(id:string, reqBody:any){
     return this.http.put(`${this.server_url}/feedbacks/${id}`,reqBody,this.appendToken())
+  }
+
+  // post req by manage recipe component when add btn clicked
+  addRecipeAPI(reqBody:RecipeModel){
+    return this.http.post(`${this.server_url}/recipes`,reqBody,this.appendToken())
   }
 }
