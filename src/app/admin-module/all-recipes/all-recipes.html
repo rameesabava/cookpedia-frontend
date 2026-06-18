@@ -21,20 +21,20 @@
                 </thead>
                 <tbody>
                     @for (recipe of recipeList() | search:searchKey; track $index; let i=$index;){
-                        <tr>
-                            <td>{{i+1}}</td>
-                            <td>{{recipe.name}}</td>
-                            <td><img width="50px" height="50px" [src]="recipe.image" alt="recipe"></td>
-                            <td>{{recipe.cuisine}}</td>
-                            <td>
-                                <div class="d-flex">
-                                    <a routerLink="/admin/recipes/{{recipe._id}}" class="btn text-primary">
-                                        <i class="fa-solid fa-edit"></i>
-                                    </a>
-                                    <button class="btn ms-2 text-danger"><i class="fa-solid fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{recipe.name}}</td>
+                        <td><img width="50px" height="50px" [src]="recipe.image" alt="recipe"></td>
+                        <td>{{recipe.cuisine}}</td>
+                        <td>
+                            <div class="d-flex">
+                                <a routerLink="/admin/recipes/{{recipe._id}}" class="btn text-primary">
+                                    <i class="fa-solid fa-edit"></i>
+                                </a>
+                                <button (click)="deleteRecipe(recipe._id)" class="btn ms-2 text-danger"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

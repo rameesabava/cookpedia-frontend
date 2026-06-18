@@ -91,7 +91,7 @@
                 
                     <div class="text-center mt-3">
                         @if(recipeId){
-                        <button class="btn btn-warning">Update Recipe</button>
+                        <button (click)="editRecipe()" class="btn btn-warning">Update Recipe</button>
                         }@else {
                         <button (click)="addRecipe()" class="btn btn-success">Add Recipe</button>
                         }

@@ -1,11 +1,91 @@
 <div class="container-fluid">
     <div class="row">
+        @if (sidebarOpen){
         <div class="col-lg-2">
             <app-sidebar></app-sidebar>
         </div>
+        }
         <div class="col">
-            <h1>Dashboard</h1>
-            
+            <!-- banner -->
+            <div class="row">
+                <div class="d-flex bg-success justify-content-between align-items-center text-light p-3">
+                    <h3>
+                        <button (click)="toggleSidebar()" class="btn text-light"><i
+                                class="fa-solid fa-bars fs-2"></i></button>
+                        ADMIN
+                    </h3>
+                    <div class="dropdown">
+                        <button class="btn text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button (click)="logout()" class="dropdown-item">Logout<i
+                                        class="fa-solid fa-power-off"></i></button></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- project metric boxes -->
+            <div class="row my-5">
+                <!-- users -->
+                <div class="col-lg-3">
+                    <div style="background-color: rgb(242, 209, 65);"
+                        class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-users fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Users</h4>
+                            <h5>{{(userCount$ | async)?.length}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- recipes -->
+                <div class="col-lg-3">
+                    <div style="background-color: rgb(121, 216, 53);"
+                        class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-bowl-rice fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Recipes</h4>
+                            <h5>{{(recipeCount$ | async)?.length}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- users -->
+                <div class="col-lg-3">
+                    <div style="background-color: rgb(73, 233, 195);"
+                        class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-download fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Downloads</h4>
+                            <h5>{{(downloadCount$ | async)?.length}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- notifications -->
+                <div class="col-lg-3">
+                    <div style="background-color: rgb(232, 109, 239);"
+                        class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-message fs-2"></i>
+                        <div class="ms-5">
+                            <h5>Notifications</h5>
+                            <h6>You've<a routerLink="/admin/feedbacks">{{(feedbackCount$ | async)?.length}}</a> new
+                                alerts!</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- calender & chart -->
+            <div class="row mb-5">
+                <div class="col-lg-8">chart</div>
+                <div class="col-lg-4">
+                    <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar [(selected)]="selected"></mat-calendar>
+                    </mat-card>
+                </div>
+            </div>
         </div>
     </div>
 </div>

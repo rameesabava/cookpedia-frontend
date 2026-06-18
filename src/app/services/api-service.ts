@@ -107,4 +107,14 @@ getUserDownloadListAPI(){
   addRecipeAPI(reqBody:RecipeModel){
     return this.http.post(`${this.server_url}/recipes`,reqBody,this.appendToken())
   }
+
+  // put req by manage recipe component when edit btn clicked
+  editRecipeAPI(recipeId:string,reqBody:RecipeModel){
+    return this.http.put(`${this.server_url}/recipes/${recipeId}`,reqBody,this.appendToken())
+  }
+
+  // delete req by recipes component when delete btn clicked
+  deleteRecipeAPI(recipeId:string){
+    return this.http.delete(`${this.server_url}/recipes/${recipeId}`,this.appendToken())
+  }
 }

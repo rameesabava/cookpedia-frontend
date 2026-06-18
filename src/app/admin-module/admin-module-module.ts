@@ -11,9 +11,18 @@ import { Users } from './users/users';
 import { AllRecipes } from './all-recipes/all-recipes';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../pipes/search-pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [Dashboard, Feedbacks, Downloads, ManageRecipe, Sidebar, Users, AllRecipes],
-  imports: [CommonModule, AdminModuleRoutingModule, AsyncPipe, FormsModule, SearchPipe],
+  imports: [CommonModule, AdminModuleRoutingModule, AsyncPipe, FormsModule, SearchPipe, MatDatepickerModule, MatCardModule, BaseChartDirective],
+  providers:[
+    provideNativeDateAdapter()
+  ]
 })
-export class AdminModuleModule {}
+export class AdminModuleModule {
+  
+}

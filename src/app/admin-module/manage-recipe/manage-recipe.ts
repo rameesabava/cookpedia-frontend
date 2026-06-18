@@ -18,6 +18,17 @@ export class ManageRecipe {
   instructionArray: any = []
   MealTypeArray: any = []
 
+  ngOnInit(){
+    if(this.recipeId){
+      this.api.viewRecipeAPI(this.recipeId).subscribe((res:any)=>{
+        this.recipeDetails.set(res)
+        this.ingredientArray = this.recipeDetails().ingredients
+        this.instructionArray = this.recipeDetails().instructions
+        this.MealTypeArray = this.recipeDetails().mealType
+      })
+    }
+  }
+
   addIngredient(ingredientInput:HTMLTextAreaElement){
     if(ingredientInput.value){
       this.ingredientArray.push(ingredientInput.value)
@@ -66,6 +77,20 @@ export class ManageRecipe {
         alert(reason.error)
       }
     })
+  }else{
+    alert("Fill the form completely")
+  }
+  }
+
+  editRecipe(){
+    this.recipeDetails().ingredients = this.ingredientArray
+    this.recipeDetails().instructions = this.instructionArray
+    this.recipeDetails().mealType = this.MealTypeArray
+  const {name, ingredients, instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,cuisine,caloriesPerServing,image,mealType} = this.recipeDetails()
+  if(name && ingredients!.length>0 && instructions!.length>0 && prepTimeMinutes && cookTimeMinutes && servings && difficulty &&cuisine && caloriesPerServing && image && mealType!.length>0){
+    this.api.editRecipeAPI(this.recipeId,this.recipeDetails()).subscribe((res:any)=>{
+      alert("Recipe updated successfully!!")
+      })
   }else{
     alert("Fill the form completely")
   }
