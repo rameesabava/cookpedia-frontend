@@ -9,11 +9,13 @@ import { Profile } from './profile/profile';
 import { SaveRecipes } from './save-recipes/save-recipes';
 import { ViewRecipe } from './view-recipe/view-recipe';
 import { Pnf } from './pnf/pnf';
+import { adminGuardGuard } from './guards/admin-guard-guard';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
     // lazy load module : http://localhost:4200/admin
     {
-        path:'admin', loadChildren:()=>import('./admin-module/admin-module-module').then(module=>module.AdminModuleModule)
+        path:'admin',canActivate:[adminGuardGuard], loadChildren:()=>import('./admin-module/admin-module-module').then(module=>module.AdminModuleModule)
     },
     {
         path:'', component:Home, title:'Home'
@@ -31,13 +33,13 @@ export const routes: Routes = [
     },{
         path:'register', component:Register, title:'Register'
     },{
-        path:'profile', component:Profile, title:'Profile'
+        path:'profile',canActivate:[authGuard], component:Profile, title:'Profile'
     },
 {
-        path:'recipes/save', component:SaveRecipes, title:'Save Recipes'
+        path:'recipes/save', canActivate:[authGuard], component:SaveRecipes, title:'Save Recipes'
     },
     {
-        path:'recipes/:id', component:ViewRecipe, title:'View Recipe'
+        path:'recipes/:id', canActivate:[authGuard], component:ViewRecipe, title:'View Recipe'
     },
     {
         path:'**', component:Pnf, title:'Page Not Found'

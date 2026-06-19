@@ -36,6 +36,7 @@ export class Login {
           sessionStorage.setItem("token",res.token)
           sessionStorage.setItem("user",JSON.stringify(res.user))
           alert("Login Successful...Welcome to Cookpedia!!!")
+          this.api.getChartData()
           this.loginForm.reset()
           if(res.user.role=="user"){
             this.router.navigateByUrl('/')

@@ -79,7 +79,7 @@
             </div>
             <!-- calender & chart -->
             <div class="row mb-5">
-                <div class="col-lg-8">chart</div>
+                <div class="col-lg-8"><canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'"> </canvas></div>
                 <div class="col-lg-4">
                     <mat-card class="demo-inline-calendar-card">
                         <mat-calendar [(selected)]="selected"></mat-calendar>

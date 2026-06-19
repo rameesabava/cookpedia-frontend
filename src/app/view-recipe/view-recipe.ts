@@ -60,6 +60,7 @@ export class ViewRecipe {
   addRecipe(recipe:any){
     this.api.downloadRecipeAPI(recipe._id,recipe).subscribe((res:any)=>{
       console.log(res);
+      this.api.getChartData()
       // download pdf
       this.generatePDF(recipe)
       

@@ -15,12 +15,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { BaseChartDirective } from 'ng2-charts';
-
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 @NgModule({
   declarations: [Dashboard, Feedbacks, Downloads, ManageRecipe, Sidebar, Users, AllRecipes],
   imports: [CommonModule, AdminModuleRoutingModule, AsyncPipe, FormsModule, SearchPipe, MatDatepickerModule, MatCardModule, BaseChartDirective],
   providers:[
-    provideNativeDateAdapter()
+    provideNativeDateAdapter(),
+    provideCharts(withDefaultRegisterables())
   ]
 })
 export class AdminModuleModule {

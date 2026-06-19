@@ -34,7 +34,7 @@ export class Recipes {
       // console.log(res);
       this.allRecipes.set(res)
       // console.log(this.allRecipes());  
-
+this.dummyAllRecipes = res
       const dummyCuisineArray = res.map((item:any)=>item.cuisine)
       dummyCuisineArray.forEach((cuisine:any)=>{
         !this.cuisineArray().includes(cuisine) && this.cuisineArray().push(cuisine)
